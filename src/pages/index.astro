@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Cases from '../components/sections/Cases.astro';
+import Process from '../components/sections/Process.astro';
+import Contact from '../components/sections/Contact.astro';
+import ScrollToTop from '../components/ui/ScrollToTop.astro';
+---
+
+<BaseLayout title="aur1lx | Никита — Монтаж видео">
+  <Header />
+  
+  <main class="pt-20">
+    <Hero />
+    <About />
+    <Cases />
+    <Process />
+    <Contact />
+  </main>
+
+  <Footer />
+  
+  <!-- Кнопка наверх -->
+  <ScrollToTop />
+</BaseLayout>

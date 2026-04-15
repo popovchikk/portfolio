@@ -1,0 +1,102 @@
+---
+import Section from '../ui/Section.astro';
+
+const steps = [
+  { 
+    number: "01", 
+    title: "Задача", 
+    description: "Ты присылаешь сырой материал и техническое задание. Я изучаю, задаю уточняющие вопросы, чтобы понять все детали проекта",
+    icon: "📋"
+  },
+  { 
+    number: "02", 
+    title: "Монтаж", 
+    description: "Делаю черновой монтаж, добавляю динамику, музыку, субтитры, визуальные эффекты и анимацию",
+    icon: "🎬"
+  },
+  { 
+    number: "03", 
+    title: "Правки", 
+    description: "Присылаю тебе на проверку. Вносим правки до идеала. Работаю до полного утверждения проекта",
+    icon: "✨"
+  },
+  { 
+    number: "04", 
+    title: "Финал", 
+    description: "Отдаю готовый ролик в нужном формате. Ты публикуешь и получаешь результат — вовлеченность и новых клиентов",
+    icon: "🚀"
+  }
+];
+---
+
+<Section id="process" class="bg-secondary relative overflow-hidden">
+  <!-- Декоративный фон -->
+  <div class="absolute inset-0 bg-gradient-to-b from-primary via-secondary to-primary opacity-50"></div>
+  
+  <div class="relative z-10">
+    <div class="mb-20 text-center animate-on-scroll">
+      <h2 class="text-4xl md:text-6xl font-bold mb-6">
+        Как проходит <span class="text-accent">работа</span>
+      </h2>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+        Простой и понятный процесс. Без лишней бюрократии и задержек.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-4">
+      {steps.map((step, index) => (
+        <div 
+          class={`
+            relative group animate-on-scroll delay-${(index + 1) * 100}
+            bg-gradient-to-br from-white/5 to-white/[0.02]
+            backdrop-blur-sm
+            border border-white/10
+            hover:border-accent/50
+            rounded-3xl
+            p-8 md:p-10
+            transition-all duration-500
+            hover:transform hover:-translate-y-2
+            hover:shadow-2xl hover:shadow-accent/10
+          `}
+        >
+          <!-- Номер -->
+          <div class="relative mb-8">
+            <span class="text-8xl md:text-9xl font-bold text-white/5 absolute -top-4 -right-4 select-none">
+              {step.number}
+            </span>
+            <div class="relative z-10 flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent/70 shadow-lg shadow-accent/30 group-hover:scale-110 transition-transform duration-500">
+              <span class="text-4xl">{step.icon}</span>
+            </div>
+          </div>
+
+          <!-- Заголовок -->
+          <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">
+            {step.title}
+          </h3>
+
+          <!-- Описание -->
+          <p class="text-text-secondary text-base leading-relaxed">
+            {step.description}
+          </p>
+
+          <!-- Декоративная линия -->
+          <div class="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  /* Плавное появление */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+// Обертка для секций (отступы, центрирование)
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<section {id} class={`py-20 md:py-32 px-4 ${className || ''}`}>
+  <div class="container mx-auto max-w-6xl">
+    <slot />
+  </div>
+</section>

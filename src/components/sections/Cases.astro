@@ -1,0 +1,86 @@
+---
+import Section from '../ui/Section.astro';
+import VideoCard from '../ui/VideoCard.astro';
+
+const cases = [
+  {
+    title: "Базовый монтаж",
+    description: "Классический стиль. Говорящая голова, чистый звук, динамичная склейка.",
+    videoUrl: "/videos/Basic.mp4",
+    task: "Сделать видео экспертным и чистым",
+    result: "Четкая подача материала, ничего лишнего"
+  },
+  {
+  title: "Стандарт (+Весь Базовый)",
+  description: "Включает всё из Базового монтажа + переходы, B-roll, визуальные акценты и динамику.",
+  videoUrl: "/videos/Standart.mp4",
+  task: "Удержать внимание зрителя",
+  result: "Retention выше, зрители смотрят до конца"
+  },
+  {
+    title: "Стандарт 2",
+    description: "Ещё один пример работы в стиле Standard с эффектами.",
+    videoUrl: "/videos/Standart2.mp4",
+    task: "Показать универсальность формата",
+    result: "Подходит для любых ниш"
+  },
+  {
+    title: "HARD / Motion 1",
+    description: "Максимальная упаковка. Моушн-дизайн, сложная анимация.",
+    videoUrl: "/videos/Hard1.mp4",
+    task: "Создать 'вау-эффект' и премиальный вид",
+    result: "Контент уровня топовых блогеров"
+  },
+  {
+    title: "HARD / Motion 2",
+    description: "Продвинутый моушн с динамичной графикой и звуковым дизайном.",
+    videoUrl: "/videos/Hard2.mp4",
+    task: "Продемонстрировать сложные техники",
+    result: "Уникальный визуальный стиль"
+  }
+];
+---
+
+<Section id="cases" class="bg-primary">
+  <div class="mb-16 text-center animate-on-scroll">
+    <h2 class="text-3xl md:text-5xl font-bold mb-4">
+      Примеры <span class="text-accent">работ</span>
+    </h2>
+    <p class="text-text-secondary text-lg max-w-2xl mx-auto">
+      Я работаю в разных стилях. От строгой говорящей головы до сложной моушн-упаковки.
+    </p>
+  </div>
+
+  <!-- Сетка: 3 видео сверху, 2 видео снизу по центру -->
+  <div class="flex flex-col items-center gap-10">
+    <!-- Первый ряд: 3 видео -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl px-4">
+      {cases.slice(0, 3).map((caseItem, index) => (
+        <div class={`animate-on-scroll delay-${(index + 1) * 100}`}>
+          <VideoCard 
+            title={caseItem.title}
+            description={caseItem.description}
+            videoUrl={caseItem.videoUrl}
+            task={caseItem.task}
+            result={caseItem.result}
+          />
+        </div>
+      ))}
+    </div>
+    
+    <!-- Второй ряд: 2 видео по центру -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl px-4">
+      {cases.slice(3, 5).map((caseItem, index) => (
+        <div class={`animate-on-scroll delay-${(index + 4) * 100}`}>
+          <VideoCard 
+            title={caseItem.title}
+            description={caseItem.description}
+            videoUrl={caseItem.videoUrl}
+            task={caseItem.task}
+            result={caseItem.result}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>

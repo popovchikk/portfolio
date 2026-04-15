@@ -1,0 +1,76 @@
+---
+import Section from '../ui/Section.astro';
+---
+
+<Section id="about" class="bg-gradient-to-b from-primary to-secondary">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    
+    <!-- Фото -->
+    <div class="relative animate-on-scroll">
+      <div class="absolute -inset-4 bg-accent/20 rounded-2xl blur-xl opacity-50"></div>
+      <img 
+        src="/images/profile.jpg" 
+        alt="Никита" 
+        class="relative rounded-2xl w-full h-auto object-cover shadow-2xl border border-white/10"
+      />
+    </div>
+
+    <!-- Текст -->
+    <div class="animate-on-scroll delay-200">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        Кто я и <span class="text-accent">что я делаю</span>
+      </h2>
+      
+      <p class="text-lg text-text-secondary mb-6 leading-relaxed">
+        Привет! Я <span class="text-white font-medium">Никита</span> — профессиональный видеомонтажёр. Помогаю экспертам превращать сырой материал в контент, который <span class="text-white">досматривают до конца</span>.
+      </p>
+
+      <!-- Боли клиента -->
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start gap-3">
+          <span class="text-accent text-xl">✓</span>
+          <p class="text-text-secondary">
+            <span class="text-white font-medium">Устали, что видео не набирают просмотры?</span> — делаю динамичный монтаж с удержанием внимания
+          </p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-accent text-xl">✓</span>
+          <p class="text-text-secondary">
+            <span class="text-white font-medium">Нет времени на монтаж?</span> — беру всю работу на себя: от черновой склейки до финальной цветокоррекции
+          </p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-accent text-xl">✓</span>
+          <p class="text-text-secondary">
+            <span class="text-white font-medium">Хотите, чтобы контент продавал?</span> — упаковываю смыслы так, чтобы зритель становился клиентом
+          </p>
+        </div>
+      </div>
+
+      <!-- Что делаю -->
+      <div class="border-t border-white/10 pt-6">
+        <p class="text-sm text-text-muted mb-4 uppercase tracking-wider font-semibold">Что входит в работу:</p>
+        <ul class="space-y-2 text-text-secondary">
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 
+            Динамичный монтаж с удержанием внимания
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 
+            Работа со звуком и саунд-дизайн
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 
+            Анимация текста и графика
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 
+            Цветокоррекция и чистка звука
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</Section>

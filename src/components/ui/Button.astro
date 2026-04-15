@@ -1,0 +1,32 @@
+---
+// Универсальная кнопка
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline';
+  class?: string;
+  target?: string;
+}
+
+const { href, variant = 'primary', class: className, target = '_blank' } = Astro.props;
+
+// Базовые стили для всех кнопок
+const baseClasses = "inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary cursor-pointer";
+
+// Стили для разных вариантов
+const variants = {
+  primary: "bg-accent hover:bg-accent-light text-white shadow-glow hover:shadow-glow-lg transform hover:-translate-y-1",
+  outline: "border-2 border-accent text-accent hover:bg-accent hover:text-white transform hover:-translate-y-1"
+};
+
+const classes = `${baseClasses} ${variants[variant]} ${className || ''}`;
+---
+
+{href ? (
+  <a href={href} target={target} class={classes}>
+    <slot />
+  </a>
+) : (
+  <button class={classes}>
+    <slot />
+  </button>
+)}

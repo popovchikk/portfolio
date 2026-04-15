@@ -1,0 +1,27 @@
+---
+import Button from '../ui/Button.astro';
+---
+
+<section class="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+
+  <div class="relative z-10 max-w-5xl mx-auto text-center animate-on-scroll">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+      Монтаж вертикальных видео,
+      <br />
+      <span class="text-accent">которые работают</span>
+    </h1>
+    
+    <p class="text-xl md:text-2xl text-text-secondary mb-4 font-light tracking-wide">
+      Reels • Shorts • TikTok
+    </p>
+
+    <p class="text-base md:text-lg text-text-secondary max-w-xl mx-auto mb-10 font-light">
+      Меня зовут <span class="text-white font-medium">Никита</span>. Создаю контент, который работает на ваш имидж.
+    </p>
+
+    <Button href="#contact" variant="primary">
+      Обсудить проект
+    </Button>
+  </div>
+</section>

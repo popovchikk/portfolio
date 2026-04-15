@@ -1,0 +1,124 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "aur1lx | Никита — Профессиональный монтаж Reels, Shorts и YouTube видео" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-primary text-text-primary font-sans">
+    <slot />
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- АНИМАЦИИ ПРИ СКРОЛЛЕ ---
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add('is-visible');
+              }, 100);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+          observer.observe(el);
+        });
+
+        // --- КНОПКА PLAY (ЗАПУСК ВИДЕО) ---
+        const playButtons = document.querySelectorAll('.play-button');
+        const allVideos = document.querySelectorAll('video');
+
+        playButtons.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const container = this.closest('.relative');
+            const video = container.querySelector('video');
+            
+            if (video) {
+              // Добавить контролы
+              video.setAttribute('controls', '');
+              video.setAttribute('controlsList', 'nodownload noremoteplayback');
+              
+              // Скрыть кнопку
+              const overlay = container.querySelector('.video-overlay');
+              if (overlay) {
+                overlay.style.display = 'none';
+              }
+              
+              // Запустить видео
+              video.play();
+              
+              // Остановить ВСЕ остальные видео и показать у них кнопки
+              allVideos.forEach(otherVideo => {
+                if (otherVideo !== video) {
+                  otherVideo.pause();
+                  const otherContainer = otherVideo.closest('.relative');
+                  const otherOverlay = otherContainer.querySelector('.video-overlay');
+                  if (otherOverlay) {
+                    otherOverlay.style.display = 'flex';
+                  }
+                }
+              });
+            }
+          });
+        });
+
+        // --- КЛИК ПО ВИДЕО (ТОЛЬКО ПАУЗА/ПЛЕЙ) ---
+        allVideos.forEach(video => {
+          video.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Просто переключаем play/pause
+            if (this.paused) {
+              this.play();
+            } else {
+              this.pause();
+            }
+          });
+        });
+
+      });
+// --- ПЛАВНЫЙ СКРОЛЛ ПО ЯКОРЯМ ---
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href !== '#' && href.length > 1) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  });
+});
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+  @import '../styles/animations.css';
+</style>
