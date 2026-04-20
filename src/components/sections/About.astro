@@ -5,17 +5,22 @@ import Section from '../ui/Section.astro';
 <Section id="about" class="bg-gradient-to-b from-primary to-secondary">
   <div class="grid md:grid-cols-2 gap-12 items-center">
     
-    <!-- Фото -->
+    <!-- ФОТО (ИСПРАВЛЕННОЕ) -->
     <div class="relative animate-on-scroll">
-      <div class="absolute -inset-4 bg-accent/20 rounded-2xl blur-xl opacity-50"></div>
-      <img 
-        src="/images/profile.jpg" 
-        alt="Никита" 
-        class="relative rounded-2xl w-full h-auto object-cover shadow-2xl border border-white/10"
-      />
+      <!-- Свечение вокруг фото -->
+      <div class="absolute -inset-4 bg-accent/20 rounded-[2.5rem] blur-xl opacity-50"></div>
+      
+      <!-- Рамка с пропорциями 2:3 (как у твоего фото 1024x1536) -->
+      <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[2/3]">
+        <img 
+          src="/images/profile.jpg" 
+          alt="Никита" 
+          class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" 
+        />
+      </div>
     </div>
 
-    <!-- Текст -->
+    <!-- ТЕКСТ (БЕЗ ИЗМЕНЕНИЙ) -->
     <div class="animate-on-scroll delay-200">
       <h2 class="text-3xl md:text-5xl font-bold mb-6">
         Кто я и <span class="text-accent">что я делаю</span>
