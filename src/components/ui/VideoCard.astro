@@ -2,87 +2,115 @@
 interface Props {
   title: string;
   description: string;
-  videoUrl?: string;
-  task?: string;
-  result?: string;
+  videoUrl: string;
+  task: string;
+  result: string;
 }
+
 const { title, description, videoUrl, task, result } = Astro.props;
 ---
 
-<div class="bg-secondary rounded-xl overflow-hidden border border-white/5 hover:border-accent/50 transition-all duration-300 group flex flex-col h-full">
+<div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:border-accent/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10 video-card-container h-full flex flex-col">
   
-  <div class="relative w-full bg-black overflow-hidden" style="aspect-ratio: 9/16; min-height: 450px;">
-    {videoUrl ? (
-      <>
-        <video 
-          src={videoUrl} 
-          class="w-full h-full video-element"
-          preload="metadata"
-          playsinline
-          oncontextmenu="return false;"
-        >
-          Ваш браузер не поддерживает видео.
-        </video>
-        
-        <div class="video-overlay absolute inset-0 flex items-center justify-center z-10">
-          <button 
-            class="play-button w-20 h-20 rounded-full bg-accent hover:bg-accent-light flex items-center justify-center transform hover:scale-110 transition-all duration-300 shadow-2xl"
-            aria-label="Play"
-          >
-            <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </button>
-        </div>
-      </>
-    ) : (
-      <div class="w-full h-full flex items-center justify-center text-text-muted bg-white/5">
-        <span>Video Placeholder</span>
+  <!-- Видео -->
+  <div class="relative aspect-[9/16] bg-black/50 overflow-hidden cursor-pointer" onclick="toggleVideo(this)">
+    
+    <!-- ИЗМЕНЕНО: preload="auto" (браузер сам загрузит первый кадр) -->
+    <video 
+      class="w-full h-full object-cover" 
+      preload="auto"
+      playsinline
+      data-video-url={videoUrl}
+    >
+      <source src={videoUrl} type="video/mp4" />
+      Ваш браузер не поддерживает видео.
+    </video>
+
+    <!-- Кнопка Play -->
+    <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 group-hover:bg-black/10">
+      <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 transition-transform duration-300 group-hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="0" stroke="currentColor" class="w-8 h-8 ml-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+        </svg>
       </div>
-    )}
+    </div>
   </div>
 
-  <div class="p-6 md:p-8 flex-1 flex flex-col">
-    <h3 class="text-2xl font-bold text-white mb-3">{title}</h3>
-    <p class="text-text-secondary text-base mb-6 flex-1 leading-relaxed">{description}</p>
+  <!-- Контент -->
+  <div class="p-6 md:p-8 flex flex-col flex-grow">
+    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors duration-300">
+      {title}
+    </h3>
+    
+    <p class="text-text-secondary text-sm mb-6 leading-relaxed">
+      {description}
+    </p>
 
-    <div class="grid grid-cols-2 gap-6 border-t border-white/10 pt-6">
-      {task && (
+    <div class="space-y-3 pt-4 border-t border-white/10 mt-auto">
+      <div class="flex items-start gap-3">
+        <div class="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
         <div>
-          <span class="text-accent text-xs font-bold uppercase tracking-widest block mb-2">Задача</span>
-          <p class="text-sm text-text-muted leading-snug">{task}</p>
+          <p class="text-xs text-text-secondary uppercase tracking-wider mb-1">Задача</p>
+          <p class="text-sm text-white">{task}</p>
         </div>
-      )}
-      {result && (
+      </div>
+      
+      <div class="flex items-start gap-3">
+        <div class="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
         <div>
-          <span class="text-accent text-xs font-bold uppercase tracking-widest block mb-2">Результат</span>
-          <p class="text-sm text-text-muted leading-snug">{result}</p>
+          <p class="text-xs text-text-secondary uppercase tracking-wider mb-1">Результат</p>
+          <p class="text-sm text-white">{result}</p>
         </div>
-      )}
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Скрипт управления -->
+<script is:inline>
+  function toggleVideo(container) {
+    const video = container.querySelector('video');
+    const overlay = container.querySelector('.play-overlay');
+    const playIconPath = "M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z";
+    
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.muted = true;
+        const otherContainer = v.closest('.video-card-container');
+        if (otherContainer) {
+          otherContainer.querySelector('.play-overlay').classList.remove('hidden');
+          otherContainer.querySelector('svg path').setAttribute('d', playIconPath);
+        }
+      }
+    });
+
+    if (video.paused) {
+      video.play();
+      video.muted = false;
+      overlay.classList.add('hidden');
+    } else {
+      video.pause();
+      video.muted = true;
+      overlay.classList.remove('hidden');
+      container.querySelector('svg path').setAttribute('d', playIconPath);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('ended', function() {
+        const container = this.closest('.video-card-container');
+        const overlay = container.querySelector('.play-overlay');
+        overlay.classList.remove('hidden');
+        container.querySelector('svg path').setAttribute('d', "M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z");
+      });
+    });
+  });
+</script>
+
 <style>
-  .video-element {
-    object-fit: contain;
-  }
-  
-  .video-element:-webkit-full-screen {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .video-element:-moz-full-screen {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .video-element:fullscreen {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-  }
+  .play-overlay { opacity: 1; }
+  .play-overlay.hidden { opacity: 0; pointer-events: none; }
 </style>
