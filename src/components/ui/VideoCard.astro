@@ -18,7 +18,7 @@ const { title, description, videoUrl, task, result } = Astro.props;
     <!-- ИЗМЕНЕНО: preload="auto" (браузер сам загрузит первый кадр) -->
     <video 
       class="w-full h-full object-cover" 
-      preload="auto"
+      preload="metadata"
       playsinline
       data-video-url={videoUrl}
     >
