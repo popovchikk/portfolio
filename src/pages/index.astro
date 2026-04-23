@@ -15,6 +15,15 @@ import ScrollToTop from '../components/ui/ScrollToTop.astro';
   
   <main class="pt-20">
     <Hero />
+    
+    <!-- 🔹 МИНИМАЛИСТИЧНЫЙ РАЗДЕЛИТЕЛЬ -->
+    <div class="w-full flex items-center justify-center py-8 md:py-12">
+      <div class="w-16 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+      <div class="mx-3 w-1.5 h-1.5 rotate-45 bg-red-500/50"></div>
+      <div class="w-16 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+    </div>
+    <!-- 🔹 КОНЕЦ РАЗДЕЛИТЕЛЯ -->
+
     <About />
     <Cases />
     <Process />
@@ -22,7 +31,5 @@ import ScrollToTop from '../components/ui/ScrollToTop.astro';
   </main>
 
   <Footer />
-  
-  <!-- Кнопка наверх -->
   <ScrollToTop />
 </BaseLayout>

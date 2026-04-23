@@ -5,12 +5,9 @@ import Section from '../ui/Section.astro';
 <Section id="about" class="bg-gradient-to-b from-primary to-secondary">
   <div class="grid md:grid-cols-2 gap-12 items-center">
     
-    <!-- ФОТО (ИСПРАВЛЕННОЕ) -->
+    <!-- Фото -->
     <div class="relative animate-on-scroll">
-      <!-- Свечение вокруг фото -->
-      <div class="absolute -inset-4 bg-accent/20 rounded-[2.5rem] blur-xl opacity-50"></div>
-      
-      <!-- Рамка с пропорциями 2:3 (как у твоего фото 1024x1536) -->
+      <div class="absolute -inset-4 bg-accent/20 rounded-2xl blur-xl opacity-50"></div>
       <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[2/3]">
         <img 
           src="/images/profile.jpg" 
@@ -20,14 +17,14 @@ import Section from '../ui/Section.astro';
       </div>
     </div>
 
-    <!-- ТЕКСТ (БЕЗ ИЗМЕНЕНИЙ) -->
+    <!-- Текст -->
     <div class="animate-on-scroll delay-200">
       <h2 class="text-3xl md:text-5xl font-bold mb-6">
-        Кто я и <span class="text-accent">что я делаю</span>
+        Кто я и <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-600">что я делаю</span>
       </h2>
       
       <p class="text-lg text-text-secondary mb-6 leading-relaxed">
-        Привет! Я <span class="text-white font-medium">Никита</span> — профессиональный видеомонтажёр. Помогаю экспертам превращать сырой материал в контент, который <span class="text-white">досматривают до конца</span>.
+        Привет! Я <span class="text-white font-medium">Никита</span> - профессиональный видеомонтажёр. Помогаю экспертам превращать сырой материал в контент, который <span class="text-white">досматривают до конца</span>.
       </p>
 
       <!-- Боли клиента -->
@@ -35,19 +32,19 @@ import Section from '../ui/Section.astro';
         <div class="flex items-start gap-3">
           <span class="text-accent text-xl">✓</span>
           <p class="text-text-secondary">
-            <span class="text-white font-medium">Устали, что видео не набирают просмотры?</span> — делаю динамичный монтаж с удержанием внимания
+            <span class="text-white font-medium">Устали, что видео не набирают просмотры?</span> - делаю динамичный монтаж с удержанием внимания
           </p>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-accent text-xl">✓</span>
           <p class="text-text-secondary">
-            <span class="text-white font-medium">Нет времени на монтаж?</span> — беру всю работу на себя: от черновой склейки до финальной цветокоррекции
+            <span class="text-white font-medium">Нет времени на монтаж?</span> - беру всю работу на себя: от черновой склейки до финальной цветокоррекции
           </p>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-accent text-xl">✓</span>
           <p class="text-text-secondary">
-            <span class="text-white font-medium">Хотите, чтобы контент продавал?</span> — упаковываю смыслы так, чтобы зритель становился клиентом
+            <span class="text-white font-medium">Хотите, чтобы контент продавал?</span> - упаковываю смыслы так, чтобы зритель становился клиентом
           </p>
         </div>
       </div>
